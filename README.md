@@ -4,11 +4,11 @@ A simple plugin that adds a dark mode to Redmine and makes the interface easier 
 
 ## Dark mode preview
 
-![Redmine dark dashboard](screenshots/screen1.jpg)
+![Redmine dark dashboard](screenshots/screen1.png)
 
-![Redmine dark issue view](screenshots/screen2.jpg)
+![Redmine dark issue view](screenshots/screen2.png)
 
-![Redmine dark content view](screenshots/screen3.jpg)
+![Redmine dark content view](screenshots/screen4.png)
 
 ## What it does
 
