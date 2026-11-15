@@ -316,7 +316,7 @@ html.dark-mode .tabular label.error + div#issue_description_and_toolbar div.jstB
 /* Lists, reports, and data tables */
 html.dark-mode table.list,
 html.dark-mode .table-list,
-html.dark-mode table.cal,
+html.dark-mode .cal,
 html.dark-mode table.progress,
 html.dark-mode table.filecontent,
 html.dark-mode table.filecontent th,
@@ -342,8 +342,8 @@ html.dark-mode table.annotate td.line-code {
 
 html.dark-mode table.list th,
 html.dark-mode .table-list-header,
-html.dark-mode table.cal .calhead,
-html.dark-mode table.cal .week-number,
+html.dark-mode .cal .calhead,
+html.dark-mode .cal .week-number,
 html.dark-mode table.filecontent th,
 html.dark-mode table.filecontent th.filename,
 html.dark-mode table.time-entries tbody tr.total,
@@ -352,9 +352,19 @@ html.dark-mode table#time-report tbody tr.total {
   color: var(--theme-text);
 }
 
+html.dark-mode .cal .calhead,
+html.dark-mode .cal .week-number,
+html.dark-mode .cal .calbody {
+  border-color: var(--theme-border-strong);
+}
+
+html.dark-mode .cal .week-number {
+  color: var(--theme-text-muted);
+}
+
 html.dark-mode table.list td,
 html.dark-mode .table-list-cell,
-html.dark-mode table.cal .calbody,
+html.dark-mode .cal .calbody,
 html.dark-mode table.filecontent,
 html.dark-mode table.filecontent td.line-code,
 html.dark-mode .sample-data,
@@ -399,9 +409,21 @@ html.dark-mode .cal .calbody.this-month {
   background-color: var(--theme-surface);
 }
 
-html.dark-mode .cal .calbody.other-month,
-html.dark-mode .cal .calbody.nwday {
-  background-color: #1b1f25;
+html.dark-mode .cal .calbody.this-month.nwday {
+  background-color: #303844;
+}
+
+html.dark-mode .cal .calbody.other-month:not(.nwday) {
+  background-color: #14181e;
+}
+
+html.dark-mode .cal .calbody.other-month.nwday {
+  background-color: #252a32;
+}
+
+html.dark-mode .cal .calbody.other-month p.day-num,
+html.dark-mode .cal .calbody .non-working-date-name {
+  color: var(--theme-text-muted);
 }
 
 html.dark-mode div#sticky-issue-header {
