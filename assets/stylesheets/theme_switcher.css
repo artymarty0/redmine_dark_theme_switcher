@@ -857,8 +857,20 @@ html.dark-mode .jstMenu button:focus {
 }
 
 /* Gantt chart */
+html.dark-mode .gantt-chart,
+html.dark-mode #gantt_area,
+html.dark-mode table.gantt-table,
 html.dark-mode .gantt-pane,
 html.dark-mode .gantt-timeline-canvas {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+html.dark-mode .gantt-pane,
+html.dark-mode .gantt-timeline-canvas,
+html.dark-mode .gantt-period,
+html.dark-mode .gantt_hdr,
+html.dark-mode table.gantt-table td {
   border-color: var(--theme-border);
 }
 
@@ -869,33 +881,83 @@ html.dark-mode .gantt-timeline-canvas > header {
   color: var(--theme-text);
 }
 
-html.dark-mode .gantt-period {
-  border-color: var(--theme-border);
+html.dark-mode .gantt_hdr[style*="background"] {
+  background-color: var(--theme-surface-raised) !important;
+  color: var(--theme-text);
 }
 
-html.dark-mode .gantt-period-non-working {
-  background-color: #252a32;
+html.dark-mode .gantt-period-non-working,
+html.dark-mode .gantt_hdr.nwday {
+  background-color: #3d434c;
+  color: var(--theme-text-muted);
 }
 
-html.dark-mode .gantt-row-hover {
-  background-color: rgba(115, 91, 39, 0.35);
+html.dark-mode .gantt-task,
+html.dark-mode .task {
+  color: var(--theme-text-muted);
+}
+
+html.dark-mode .gantt-task-late,
+html.dark-mode .task_late,
+html.dark-mode .version.task_late,
+html.dark-mode .project.task_late {
+  background-color: #ff707d;
+  border-color: #ff707d;
+  background-image: none;
+}
+
+html.dark-mode .gantt-task-done,
+html.dark-mode .task_done,
+html.dark-mode .version.task_done,
+html.dark-mode .project.task_done {
+  background-color: #39c98a;
+  border-color: #39c98a;
+  background-image: none;
 }
 
 html.dark-mode .gantt-task-todo,
-html.dark-mode .gantt-task-parent.gantt-task-todo {
-  background-color: #596575;
-  border-color: #596575;
+html.dark-mode .task_todo,
+html.dark-mode .version.task_todo,
+html.dark-mode .project.task_todo {
+  background-color: #5d8fc9;
+  border-color: #5d8fc9;
+  background-image: none;
 }
 
 html.dark-mode .gantt-task-todo.gantt-task-parent,
 html.dark-mode .gantt-task-parent.gantt-task-marker {
-  background-color: #8995a4;
-  border-color: #8995a4;
+  background-color: #7898bc;
+  border-color: #7898bc;
 }
 
 html.dark-mode .gantt-row[data-gantt-row-type="version"] .gantt-task-marker,
-html.dark-mode .gantt-task-marker {
-  background-color: #9c8af5;
+html.dark-mode .gantt-task-marker,
+html.dark-mode .task.marker,
+html.dark-mode .task.parent.marker.starting,
+html.dark-mode .task.parent.marker.ending,
+html.dark-mode .version.marker,
+html.dark-mode .project.marker {
+  background-color: #c4a7ff;
+  border-color: #c4a7ff;
+  background-image: none;
+}
+
+html.dark-mode .gantt-row-hover,
+html.dark-mode .gantt_subjects div.issue-subject:hover {
+  background-color: rgba(121, 184, 255, 0.12);
+}
+
+html.dark-mode .gantt-today {
+  border-color: #ff707d;
+}
+
+html.dark-mode #today_line {
+  border-inline-start-color: #ff707d !important;
+}
+
+html.dark-mode .gantt-relations path[stroke="#000"],
+html.dark-mode #gantt_draw_area path[stroke="#000"] {
+  stroke: #91a4ba;
 }
 
 /* Dropdowns, autocomplete, context menus, dialogs, and tooltips */
