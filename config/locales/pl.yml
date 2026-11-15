@@ -1,3 +1,10 @@
 pl:
   label_toggle_theme: "Przełącz motyw (jasny/ciemny)"
   label_theme: "Motyw"
+  label_theme_switcher_updates: "Aktualizacje Theme Switcher"
+  label_theme_switcher_current_version: "Zainstalowana wersja: %{version}"
+  label_theme_switcher_latest_version: "Najnowsza wersja: %{version}"
+  label_theme_switcher_update_available: "Dostępna jest nowsza wersja."
+  label_theme_switcher_up_to_date: "Wtyczka jest aktualna."
+  label_theme_switcher_update_check_failed: "Nie udało się sprawdzić aktualizacji: %{error}"
+  label_theme_switcher_download: "Zobacz dostępne wersje w GitHub"
