@@ -2,9 +2,9 @@ require_relative 'lib/redmine_dark_theme_switcher/hooks'
 
 Redmine::Plugin.register :redmine_dark_theme_switcher do
   name 'Redmine Theme Switcher'
-  author 'artymart'
+  author 'artymarty'
   description 'Light and dark mode switch'
-  version '0.1.0'
+  version '1.0.0'
   requires_redmine version_or_higher: '6.0.0'
 
   menu :account_menu, :theme_toggle, '#',
