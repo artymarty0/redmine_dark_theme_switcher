@@ -1,6 +1,6 @@
-require_relative 'lib/redmine_theme_switcher/hooks'
+require_relative 'lib/redmine_dark_theme_switcher/hooks'
 
-Redmine::Plugin.register :redmine_theme_switcher do
+Redmine::Plugin.register :redmine_dark_theme_switcher do
   name 'Redmine Theme Switcher'
   author 'artymart'
   description 'Light and dark mode switch'

@@ -915,6 +915,40 @@ html.dark-mode div.tooltip:hover span.tip {
   color: var(--theme-text);
 }
 
+
+html.dark-mode #context-menu ul {
+  background: var(--theme-surface);
+  border-color: var(--theme-border-strong);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+html.dark-mode #context-menu li {
+    border: 1px solid rgb(79, 76, 76);
+}
+
+html.dark-mode #context-menu li:hover {
+  background-color: var(--theme-surface-hover);
+  border-color: var(--theme-accent);
+}
+
+html.dark-mode #context-menu a.disabled,
+html.dark-mode #context-menu a.disabled:hover {
+  color: var(--theme-text-muted);
+}
+
+html.dark-mode #context-menu a.disabled svg.icon-svg {
+  stroke: var(--theme-text-muted);
+}
+
+html.dark-mode #context-menu li:hover a,
+html.dark-mode #context-menu li:hover a:hover {
+  color: #fff;
+}
+
+html.dark-mode #context-menu li:hover a svg.icon-svg {
+  stroke: #fff;
+}
+
 html.dark-mode .dropdown-content {
   --dropdown-bg: var(--theme-surface);
   --dropdown-border: var(--theme-border-strong);
