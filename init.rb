@@ -5,7 +5,7 @@ Redmine::Plugin.register :redmine_dark_theme_switcher do
   name 'Redmine Theme Switcher'
   author 'artymarty'
   description 'Light and dark mode switch'
-  version '1.0.0'
+  version '1.1.0'
   url 'https://github.com/artymarty0/redmine_dark_theme_switcher'
   requires_redmine version_or_higher: '6.0.0'
 
