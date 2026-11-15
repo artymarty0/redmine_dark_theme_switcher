@@ -23,15 +23,18 @@ A simple plugin that adds a dark mode to Redmine and makes the interface easier 
 - Clean dark interface for the main Redmine pages
 - Better readability for tables, forms, wiki pages, and code blocks
 - No server-side configuration required
+- An admin page checks whether a newer version is available on GitHub
 
 ## Installation
 
 1. Copy the plugin folder into your Redmine `plugins/` directory.
 2. Restart Redmine.
 3. Log in and use the theme switcher in the account menu.
+4. Administrators can check for updates under **Administration → Theme Switcher Updates**.
 
 ## Notes
 
 - The plugin is designed for Redmine 6+
 - Theme settings are saved in the browser, not on the server
 - It is a visual enhancement focused on usability and readability
+- The plugin homepage is shown on the Redmine plugins page; version checks use GitHub tags and require an internet connection.

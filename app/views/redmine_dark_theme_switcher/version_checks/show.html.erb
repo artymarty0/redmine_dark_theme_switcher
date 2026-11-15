@@ -1,0 +1,18 @@
+<h2><%= l(:label_theme_switcher_updates) %></h2>
+
+<p>
+  <%= l(:label_theme_switcher_current_version, version: @plugin.version) %>
+</p>
+
+<% if @check_error %>
+  <p class="warning"><%= l(:label_theme_switcher_update_check_failed, error: @check_error) %></p>
+<% else %>
+  <p><%= l(:label_theme_switcher_latest_version, version: @latest_version) %></p>
+
+  <% if @update_available %>
+    <p class="warning"><%= l(:label_theme_switcher_update_available) %></p>
+    <p><%= link_to l(:label_theme_switcher_download), 'https://github.com/artymarty0/redmine_dark_theme_switcher/tags' %></p>
+  <% else %>
+    <p class="nodata"><%= l(:label_theme_switcher_up_to_date) %></p>
+  <% end %>
+<% end %>
