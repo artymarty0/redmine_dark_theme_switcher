@@ -47,7 +47,7 @@ Releases are tagged `vX.Y.Z` in Git (e.g. `v1.1.0`, `v1.0.0`), while the plugin 
 
 GitHub Actions (`.github/workflows/test-redmine.yml`) builds Redmine from source and installs this plugin for each supported Redmine version:
 
-- **7.0** (Ruby 3.3)
+- **7.0** (Ruby 4.0.9)
 - **6.1** (Ruby 3.2)
 - **6.0** (Ruby 3.1)
 
