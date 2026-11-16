@@ -42,3 +42,13 @@ Releases are tagged `vX.Y.Z` in Git (e.g. `v1.1.0`, `v1.0.0`), while the plugin 
 - Theme settings are saved in the browser, not on the server
 - It is a visual enhancement focused on usability and readability
 - The plugin homepage is shown on the Redmine plugins page; version checks use GitHub tags and require an internet connection.
+
+## Continuous Integration
+
+GitHub Actions (`.github/workflows/test-redmine.yml`) builds Redmine from source and installs this plugin for each supported Redmine version:
+
+- **7.0** (Ruby 3.3)
+- **6.1** (Ruby 3.2)
+- **6.0** (Ruby 3.1)
+
+On every push, pull request, and weekly schedule it runs `db:migrate`, plugin migrations, and a smoke test that verifies `Redmine::Plugin.find(:redmine_dark_theme_switcher)` loads correctly. If a job fails, the Redmine logs are uploaded as an artifact.

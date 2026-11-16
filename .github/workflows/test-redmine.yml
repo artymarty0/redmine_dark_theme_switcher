@@ -1,0 +1,128 @@
+name: Test plugin on Redmine versions
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * 0' # weekly, every Sunday
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - redmine_version: '7.0.5'
+            redmine_branch: '7.0-stable'
+            ruby_version: '3.3'
+          - redmine_version: '6.1.4'
+            redmine_branch: '6.1-stable'
+            ruby_version: '3.2'
+          - redmine_version: '6.0.6'
+            redmine_branch: '6.0-stable'
+            ruby_version: '3.1'
+
+    env:
+      REDMINE_VERSION: ${{ matrix.redmine_version }}
+      REDMINE_BRANCH: ${{ matrix.redmine_branch }}
+      RUBY_VERSION: ${{ matrix.ruby_version }}
+      REDMINE_DIR: ${{ runner.temp }}/redmine
+      PLUGIN_NAME: redmine_dark_theme_switcher
+
+    steps:
+      - name: Checkout plugin
+        uses: actions/checkout@v4
+        with:
+          path: plugin
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            libpq-dev \
+            libsqlite3-dev \
+            libyaml-dev \
+            zlib1g-dev \
+            libssl-dev \
+            libgmp-dev \
+            libmysqlclient-dev \
+            libmagickwand-dev \
+            imagemagick \
+            git \
+            subversion \
+            nodejs \
+            npm
+
+      - name: Clone Redmine ${{ matrix.redmine_version }}
+        run: |
+          git clone --depth 1 --branch ${{ matrix.redmine_branch }} \
+            https://github.com/redmine/redmine.git ${{ env.REDMINE_DIR }}
+
+      - name: Copy plugin into Redmine plugins directory
+        run: |
+          mkdir -p ${{ env.REDMINE_DIR }}/plugins
+          cp -r ${{ github.workspace }}/plugin ${{ env.REDMINE_DIR }}/plugins/${{ env.PLUGIN_NAME }}
+
+      - name: Install Redmine gems
+        working-directory: ${{ env.REDMINE_DIR }}
+        run: |
+          gem install bundler
+          bundle config set --local without 'development test'
+          bundle install --jobs 4 --retry 3
+
+      - name: Configure Redmine database (SQLite)
+        working-directory: ${{ env.REDMINE_DIR }}
+        run: |
+          cat > config/database.yml <<EOF
+          production:
+            adapter: sqlite3
+            database: db/redmine.db
+          development:
+            adapter: sqlite3
+            database: db/redmine.db
+          test:
+            adapter: sqlite3
+            database: db/redmine_test.db
+          EOF
+
+      - name: Generate secret token
+        working-directory: ${{ env.REDMINE_DIR }}
+        run: |
+          bundle exec rake generate_secret_token
+
+      - name: Run database migrations
+        working-directory: ${{ env.REDMINE_DIR }}
+        run: |
+          RAILS_ENV=production bundle exec rake db:migrate
+
+      - name: Run plugin migrations
+        working-directory: ${{ env.REDMINE_DIR }}
+        run: |
+          RAILS_ENV=production bundle exec rake redmine:plugins:migrate
+
+      - name: Smoke test – verify plugin loads in Redmine
+        working-directory: ${{ env.REDMINE_DIR }}
+        run: |
+          bundle exec rails runner -e production '
+            plugin = Redmine::Plugin.find(:redmine_dark_theme_switcher)
+            puts "Plugin found: #{plugin.name} v#{plugin.version}"
+            abort("Plugin not loaded!") unless plugin.name.include?("Theme Switcher")
+          '
+
+      - name: Upload Redmine logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: redmine-logs-${{ matrix.redmine_version }}
+          path: ${{ env.REDMINE_DIR }}/log/*.log
+          retention-days: 3
