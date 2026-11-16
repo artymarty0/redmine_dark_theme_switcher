@@ -32,6 +32,10 @@ A simple plugin that adds a dark mode to Redmine and makes the interface easier 
 3. Log in and use the theme switcher in the account menu.
 4. Administrators can check for updates under **Administration → Theme Switcher Updates**.
 
+## Versioning
+
+Releases are tagged `vX.Y.Z` in Git (e.g. `v1.1.0`, `v1.0.0`), while the plugin version declared in `init.rb` stays `X.Y.Z` without the prefix. The admin update check reads GitHub tags and tolerates the `v` prefix, so keep both values in sync in the same commit.
+
 ## Notes
 
 - The plugin is designed for Redmine 6+
