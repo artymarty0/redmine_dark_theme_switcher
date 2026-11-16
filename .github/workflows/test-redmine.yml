@@ -17,7 +17,7 @@ jobs:
         include:
           - redmine_version: '7.0.5'
             redmine_branch: '7.0-stable'
-            ruby_version: '3.3'
+            ruby_version: '4.0.9'
           - redmine_version: '6.1.4'
             redmine_branch: '6.1-stable'
             ruby_version: '3.2'
@@ -29,7 +29,7 @@ jobs:
       REDMINE_VERSION: ${{ matrix.redmine_version }}
       REDMINE_BRANCH: ${{ matrix.redmine_branch }}
       RUBY_VERSION: ${{ matrix.ruby_version }}
-      REDMINE_DIR: ${{ runner.temp }}/redmine
+      REDMINE_DIR: /tmp/redmine
       PLUGIN_NAME: redmine_dark_theme_switcher
 
     steps:
