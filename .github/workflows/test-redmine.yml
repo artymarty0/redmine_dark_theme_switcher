@@ -71,13 +71,6 @@ jobs:
           mkdir -p ${{ env.REDMINE_DIR }}/plugins
           cp -r ${{ github.workspace }}/plugin ${{ env.REDMINE_DIR }}/plugins/${{ env.PLUGIN_NAME }}
 
-      - name: Install Redmine gems
-        working-directory: ${{ env.REDMINE_DIR }}
-        run: |
-          gem install bundler
-          bundle config set --local without 'development'
-          bundle install --jobs 4 --retry 3
-
       - name: Configure Redmine database (SQLite)
         working-directory: ${{ env.REDMINE_DIR }}
         run: |
@@ -92,6 +85,13 @@ jobs:
             adapter: sqlite3
             database: db/redmine_test.db
           EOF
+
+      - name: Install Redmine gems
+        working-directory: ${{ env.REDMINE_DIR }}
+        run: |
+          gem install bundler
+          bundle config set --local without 'development'
+          bundle install --jobs 4 --retry 3
 
       - name: Generate secret token
         working-directory: ${{ env.REDMINE_DIR }}
